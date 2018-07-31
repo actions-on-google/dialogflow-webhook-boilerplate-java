@@ -18,6 +18,7 @@ package com.example;
 
 import com.google.actions.api.App;
 
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -25,6 +26,7 @@ import java.io.IOException;
 import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
+@WebServlet(name = "actions", value = "/")
 public class ActionsServlet extends HttpServlet {
 
   private App actionsApp = new MyActionsApp();
