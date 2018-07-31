@@ -1,0 +1,20 @@
+{
+  "responseId": "some-response-id",
+  "queryResult": {
+    "queryText": "welcome",
+    "action": "input.welcome",
+    "parameters": {},
+    "allRequiredParamsPresent": true,
+    "intent": {
+      "name": "projects/df-project-name/agent/intents/some-id",
+      "displayName": "welcome"
+    },
+    "intentDetectionConfidence": 1,
+    "diagnosticInfo": {},
+    "languageCode": "en"
+  },
+  "originalDetectIntentRequest": {
+    "payload": {}
+  },
+  "session": "projects/df-project-name/agent/sessions/some-response-id"
+}
