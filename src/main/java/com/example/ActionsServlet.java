@@ -26,6 +26,10 @@ import java.io.IOException;
 import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
+/**
+ * Handles request received via HTTP POST and delegates it to your Actions app.
+ * See: [Request handling in Google App Engine](https://cloud.google.com/appengine/docs/flexible/java/how-requests-are-handled).
+ */
 @WebServlet(name = "actions", value = "/")
 public class ActionsServlet extends HttpServlet {
 

@@ -27,9 +27,8 @@ import org.json.simple.parser.ParseException;
 import java.io.*;
 
 /**
- * Handles request received via AWS - API Gateway proxy integration and
- * delegates to MyActionsApp.
- * https://docs.aws.amazon.com/apigateway/latest/developerguide/set-up-lambda-proxy-integrations.html
+ * Handles request received via AWS - API Gateway [proxy integration](https://docs.aws.amazon.com/apigateway/latest/developerguide/set-up-lambda-proxy-integrations.html)
+ * and delegates to your Actions App.
  */
 public class ActionsAWSHandler implements RequestStreamHandler {
   // Replace this with your webhook.
