@@ -7,7 +7,7 @@
     "allRequiredParamsPresent": true,
     "intent": {
       "name": "projects/df-project-name/agent/intents/some-id",
-      "displayName": "welcome"
+      "displayName": "Default Welcome Intent"
     },
     "intentDetectionConfidence": 1,
     "diagnosticInfo": {},
