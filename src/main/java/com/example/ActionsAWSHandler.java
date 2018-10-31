@@ -32,8 +32,8 @@ import java.io.*;
  */
 public class ActionsAWSHandler implements RequestStreamHandler {
   // Replace this with your webhook.
-  private App actionsApp = new MyActionsApp();
-  private JSONParser parser = new JSONParser();
+  private final App actionsApp = new MyActionsApp();
+  private final JSONParser parser = new JSONParser();
 
   @Override
   public void handleRequest(InputStream inputStream,
