@@ -29,7 +29,6 @@ sourceCompatibility = 1.8
 apply plugin: 'java'
 apply plugin: 'war'
 apply plugin: com.google.cloud.tools.gradle.appengine.AppEnginePlugin
-apply plugin: org.akhikhl.gretty.GrettyPlugin
 
 repositories {
     jcenter()
@@ -39,12 +38,6 @@ repositories {
 dependencies {
     providedCompile group: 'javax.servlet', name: 'javax.servlet-api', version: '3.1.0'
     providedCompile group: 'com.google.appengine', name: 'appengine', version: '+'
-}
-
-gretty {
-    httpPort = 8080
-    contextPath = '/'
-    servletContainer = 'jetty9'
 }
 
 appengine {

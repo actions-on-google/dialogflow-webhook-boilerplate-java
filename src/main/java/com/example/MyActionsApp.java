@@ -22,23 +22,33 @@ import com.google.actions.api.DialogflowApp;
 import com.google.actions.api.ForIntent;
 import com.google.actions.api.response.ResponseBuilder;
 
+import java.util.ResourceBundle;
 import java.util.concurrent.CompletableFuture;
 
 public class MyActionsApp extends DialogflowApp {
 
+  // Note: Do not store any state as an instance variable.
+  // It is ok to have final variables where the variable is assigned a value in
+  // the constructor but remains unchanged. This is required to ensure thread-
+  // safety as the entry point (ActionServlet/ActionsAWSHandler) instances may
+  // be reused by the server.
+
   @ForIntent("welcome")
   public CompletableFuture<ActionResponse> welcome(ActionRequest request) {
     ResponseBuilder responseBuilder = getResponseBuilder();
-    responseBuilder
-            .add("Welcome to my app");
+    ResourceBundle rb = ResourceBundle.getBundle("resources");
+
+    responseBuilder.add(rb.getString("welcome"));
     return CompletableFuture.completedFuture(responseBuilder.build());
   }
 
   @ForIntent("bye")
   public CompletableFuture<ActionResponse> bye(ActionRequest request) {
     ResponseBuilder responseBuilder = getResponseBuilder();
+    ResourceBundle rb = ResourceBundle.getBundle("resources");
+
     responseBuilder
-            .add("Ok see you later.")
+            .add(rb.getString("bye"))
             .endConversation();
     return CompletableFuture.completedFuture(responseBuilder.build());
   }
