@@ -1,0 +1,32 @@
+{
+  "fulfillmentText": "Welcome to my app.",
+  "outputContexts": [
+    {
+      "lifespanCount": 99,
+      "name": "projects/project-id/agent/sessions/session-id/contexts/_actions_on_google",
+      "parameters": {
+        "data": "{}"
+      }
+    }
+  ],
+  "payload": {
+    "google": {
+      "expectUserResponse": true,
+      "richResponse": {
+        "items": [
+          {
+            "simpleResponse": {
+              "textToSpeech": "Welcome to my app."
+            }
+          }
+        ]
+      },
+      "isSsml": false,
+      "systemIntent": {
+        "intent": "actions.intent.TEXT",
+        "data": {}
+      },
+      "userStorage": "{\"data\":{}}"
+    }
+  }
+}

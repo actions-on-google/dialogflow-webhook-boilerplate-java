@@ -1,20 +1,80 @@
 {
-  "responseId": "some-response-id",
+  "responseId": "abcde",
   "queryResult": {
-    "queryText": "welcome",
-    "action": "input.welcome",
+    "queryText": "GOOGLE_ASSISTANT_WELCOME",
     "parameters": {},
     "allRequiredParamsPresent": true,
+    "outputContexts": [
+      {
+        "name": "projects/project-id/agent/sessions/session-id/contexts/google_assistant_welcome"
+      },
+      {
+        "name": "projects/project-id/agent/sessions/session-id/contexts/actions_capability_screen_output"
+      },
+      {
+        "name": "projects/project-id/agent/sessions/session-id/contexts/actions_capability_audio_output"
+      },
+      {
+        "name": "projects/project-id/agent/sessions/session-id/contexts/google_assistant_input_type_keyboard"
+      },
+      {
+        "name": "projects/project-id/agent/sessions/session-id/contexts/actions_capability_media_response_audio"
+      },
+      {
+        "name": "projects/project-id/agent/sessions/session-id/contexts/actions_capability_web_browser"
+      }
+    ],
     "intent": {
-      "name": "projects/df-project-name/agent/intents/some-id",
-      "displayName": "welcome"
+      "name": "projects/project-id/agent/intents/91a2d797-7e16-4db1-9a28-19cdd8b2c729",
+      "displayName": "Default Welcome Intent"
     },
-    "intentDetectionConfidence": 1,
-    "diagnosticInfo": {},
-    "languageCode": "en"
+    "intentDetectionConfidence": 1.0,
+    "languageCode": "en-us"
   },
   "originalDetectIntentRequest": {
-    "payload": {}
+    "source": "google",
+    "version": "2",
+    "payload": {
+      "isInSandbox": true,
+      "surface": {
+        "capabilities": [
+          {
+            "name": "actions.capability.WEB_BROWSER"
+          },
+          {
+            "name": "actions.capability.MEDIA_RESPONSE_AUDIO"
+          },
+          {
+            "name": "actions.capability.SCREEN_OUTPUT"
+          },
+          {
+            "name": "actions.capability.AUDIO_OUTPUT"
+          }
+        ]
+      },
+      "requestType": "SIMULATOR",
+      "inputs": [
+        {
+          "rawInputs": [
+            {
+              "query": "Talk to my test app",
+              "inputType": "KEYBOARD"
+            }
+          ],
+          "intent": "actions.intent.MAIN"
+        }
+      ],
+      "user": {
+        "userStorage": "{\"data\":{}}",
+        "lastSeen": "2018-11-14T19:41:20Z",
+        "locale": "en-US",
+        "userId": "userid"
+      },
+      "conversation": {
+        "conversationId": "session-id",
+        "type": "NEW"
+      }
+    }
   },
-  "session": "projects/df-project-name/agent/sessions/some-response-id"
+  "session": "projects/project-id/agent/sessions/session-id"
 }

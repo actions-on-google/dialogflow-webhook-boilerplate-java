@@ -21,16 +21,13 @@ import com.google.actions.api.ActionResponse;
 import com.google.actions.api.DialogflowApp;
 import com.google.actions.api.ForIntent;
 import com.google.actions.api.response.ResponseBuilder;
-
 import java.util.ResourceBundle;
-import java.util.concurrent.CompletableFuture;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class MyActionsApp extends DialogflowApp {
 
-  private static final Logger LOGGER =
-      LoggerFactory.getLogger(MyActionsApp.class);
+  private static final Logger LOGGER = LoggerFactory.getLogger(MyActionsApp.class);
 
   // Note: Do not store any state as an instance variable.
   // It is ok to have final variables where the variable is assigned a value in
@@ -38,29 +35,25 @@ public class MyActionsApp extends DialogflowApp {
   // safety as the entry point (ActionServlet/ActionsAWSHandler) instances may
   // be reused by the server.
 
-  @ForIntent("welcome")
-  public CompletableFuture<ActionResponse> welcome(ActionRequest request) {
+  @ForIntent("Default Welcome Intent")
+  public ActionResponse welcome(ActionRequest request) {
     LOGGER.info("Welcome intent start.");
-    ResponseBuilder responseBuilder = getResponseBuilder();
-
+    ResponseBuilder responseBuilder = getResponseBuilder(request);
     ResourceBundle rb = ResourceBundle.getBundle("resources");
     responseBuilder.add(rb.getString("welcome"));
 
     LOGGER.info("Welcome intent end.");
-    return CompletableFuture.completedFuture(responseBuilder.build());
+    return responseBuilder.build();
   }
 
   @ForIntent("bye")
-  public CompletableFuture<ActionResponse> bye(ActionRequest request) {
+  public ActionResponse bye(ActionRequest request) {
     LOGGER.info("Bye intent start.");
-    ResponseBuilder responseBuilder = getResponseBuilder();
+    ResponseBuilder responseBuilder = getResponseBuilder(request);
     ResourceBundle rb = ResourceBundle.getBundle("resources");
 
-    responseBuilder
-            .add(rb.getString("bye"))
-            .endConversation();
-
+    responseBuilder.add(rb.getString("bye")).endConversation();
     LOGGER.info("Bye intent end.");
-    return CompletableFuture.completedFuture(responseBuilder.build());
+    return responseBuilder.build();
   }
 }
