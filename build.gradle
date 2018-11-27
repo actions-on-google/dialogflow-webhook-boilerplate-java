@@ -34,18 +34,23 @@ sourceCompatibility = 1.8
 
 repositories {
     mavenCentral()
+    // TODO: Remove when library is released.
+    maven {
+        url "http://oss.sonatype.org/content/repositories/snapshots/"
+    }
+}
+
+configurations.all {
+    // Check for changes to dependencies every day.
+    // TODO: Remove when library is released.
+    resolutionStrategy.cacheDynamicVersionsFor(8, "hours")
 }
 
 dependencies {
     compile "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
-    // Dialogflow JSON bindings
-    compile files('lib/dialogflow-webhook-bindings.jar')
 
-    // Actions on Google JSON bindings
-    compile files('lib/google-actions-bindings.jar')
-
-    // Java actions api
-    compile files('lib/actions-on-google-0.1.0.jar')
+    // TODO: Change version upon release.
+    compile group: 'com.google.actions', name: 'actions-on-google', version: '1.0-SNAPSHOT'
 
     // https://mvnrepository.com/artifact/com.google.code.gson/gson
     compile group: 'com.google.code.gson', name: 'gson', version: '2.8.4'
