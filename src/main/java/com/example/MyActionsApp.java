@@ -21,26 +21,32 @@ import com.google.actions.api.ActionResponse;
 import com.google.actions.api.DialogflowApp;
 import com.google.actions.api.ForIntent;
 import com.google.actions.api.response.ResponseBuilder;
+import com.google.api.services.actions_fulfillment.v2.model.User;
 import java.util.ResourceBundle;
+import java.util.stream.Collectors;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/**
+ * Implements all intent handlers for this Action. Note that your App must extend from DialogflowApp
+ * if using Dialogflow or ActionsSdkApp for ActionsSDK based Actions.
+ */
 public class MyActionsApp extends DialogflowApp {
 
   private static final Logger LOGGER = LoggerFactory.getLogger(MyActionsApp.class);
-
-  // Note: Do not store any state as an instance variable.
-  // It is ok to have final variables where the variable is assigned a value in
-  // the constructor but remains unchanged. This is required to ensure thread-
-  // safety as the entry point (ActionServlet/ActionsAWSHandler) instances may
-  // be reused by the server.
 
   @ForIntent("Default Welcome Intent")
   public ActionResponse welcome(ActionRequest request) {
     LOGGER.info("Welcome intent start.");
     ResponseBuilder responseBuilder = getResponseBuilder(request);
     ResourceBundle rb = ResourceBundle.getBundle("resources");
-    responseBuilder.add(rb.getString("welcome"));
+    User user = request.getUser();
+
+    if (user != null && user.getLastSeen() != null) {
+      responseBuilder.add(rb.getString("welcome_back"));
+    } else {
+      responseBuilder.add(rb.getString("welcome"));
+    }
 
     LOGGER.info("Welcome intent end.");
     return responseBuilder.build();

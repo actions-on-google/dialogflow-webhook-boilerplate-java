@@ -18,7 +18,10 @@ package com.example;
 
 import com.google.actions.api.App;
 import java.io.IOException;
-import java.util.function.Consumer;
+import java.util.Enumeration;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.concurrent.ExecutionException;
 import java.util.stream.Collectors;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -41,21 +44,17 @@ public class ActionsServlet extends HttpServlet {
   protected void doPost(HttpServletRequest req, HttpServletResponse res) throws IOException {
     String body = req.getReader().lines().collect(Collectors.joining());
     LOG.info("doPost, body = {}", body);
-    actionsApp
-        .handleRequest(body, null)
-        .thenAccept(
-            (Consumer<String>)
-                jsonResponse -> {
-                  LOG.info("Generated json = {}", jsonResponse);
-                  res.setContentType("application/json");
-                  writeResponse(res, jsonResponse);
-                })
-        .exceptionally(
-            (throwable -> {
-              LOG.error("Error in App.handleRequest ", throwable);
-              writeResponse(res, "Error handling the intent - " + throwable);
-              return null;
-            }));
+
+    try {
+      String jsonResponse = actionsApp.handleRequest(body, getHeadersMap(req)).get();
+      LOG.info("Generated json = {}", jsonResponse);
+      res.setContentType("application/json");
+      writeResponse(res, jsonResponse);
+    } catch (InterruptedException e) {
+      handleError(res, e);
+    } catch (ExecutionException e) {
+      handleError(res, e);
+    }
   }
 
   @Override
@@ -75,4 +74,27 @@ public class ActionsServlet extends HttpServlet {
       e.printStackTrace();
     }
   }
+
+  private void handleError(HttpServletResponse res, Throwable throwable) {
+    try {
+      throwable.printStackTrace();
+      LOG.error("Error in App.handleRequest ", throwable);
+      res.getWriter().write("Error handling the intent - " + throwable.getMessage());
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+  }
+
+  private Map<String, String> getHeadersMap(HttpServletRequest request) {
+    Map<String, String> map = new HashMap();
+
+    Enumeration headerNames = request.getHeaderNames();
+    while (headerNames.hasMoreElements()) {
+      String key = (String) headerNames.nextElement();
+      String value = request.getHeader(key);
+      map.put(key, value);
+    }
+    return map;
+  }
+
 }
