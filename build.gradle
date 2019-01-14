@@ -34,22 +34,11 @@ sourceCompatibility = 1.8
 
 repositories {
     mavenCentral()
-    // TODO: Remove when library is released.
-    maven {
-        url "http://oss.sonatype.org/content/repositories/staging/"
-    }
-}
-
-configurations.all {
-    // Check for changes to dependencies every day.
-    // TODO: Remove when library is released.
-    resolutionStrategy.cacheDynamicVersionsFor(8, "hours")
 }
 
 dependencies {
     compile "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
 
-    // TODO: Change version upon release.
     compile group: 'com.google.actions', name: 'actions-on-google', version: '1.0.0'
 
     compile group: 'com.googlecode.json-simple', name: 'json-simple', version: '1.1.1'

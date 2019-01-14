@@ -1,62 +1,54 @@
-# Actions on Google: Java client library boilerplate
+# Actions on Google: Java Client Library Boilerplate
 
 Boilerplate to help you get started quickly with the Java client library for Actions on Google.
 
-## Setup Instructions
+### Setup Instructions
 
-### Action configuration
-1. Use the [Actions on Google Console](https://console.actions.google.com) to add a new project with a name of your choosing and click *Create Project*.
-1. Click *Skip*, located on the top right.
-1. On the left navigation menu under *BUILD*, click on *Actions*. Click on *Add Your First Action* and choose your app's language(s).
-1. Select *Custom intent*, click *BUILD*. This will open a Dialogflow console. Click *CREATE*.
-1. Click on the gear icon to see the project settings.
-1. Select *Export and Import*.
-1. Select *Restore from zip*. Follow the directions to restore from the `agent.zip` file in this repo.
-1. Deploy the fulfillment webhook as described in the next section
-1. Go back to the Dialogflow console and select *Fulfillment* from the left navigation menu. Enable *Webhook*, set the value of *URL* to the webhook from the next section, then click *Save*.
+#### Action Configuration
+1. From the [Actions on Google Console](https://console.actions.google.com/), add a new project (this will become your *Project ID*) > **Create Project** > **Skip**.
+1. From the left navigation menu under **Build** > **Actions** > **Add Your First Action** > **BUILD** (this will bring you to the Dialogflow console) > Select language and time zone > **CREATE**.
+1. In Dialogflow, go to **Settings** ⚙ > **Export and Import** > **Restore from zip**.
+    + Follow the directions to restore from the `agent.zip` file in this repo.
 
-### Webhook
-
+#### App Engine Deployment & Webhook Configuration
 When a new project is created using the Actions Console, it also creates a Google Cloud project in the background.
-Copy the name of this project from the Action Console project settings page.
-
-#### Build for Google Cloud Platform
-    1. Delete ActionsAWSHandler.java
-    1. Remove the following line from build.gradle:
-       1. `apply from: 'build-aws.gradle'`
-    1. Instructions for [Google Cloud App Engine Standard Environment](https://cloud.google.com/appengine/docs/standard/java/)
-    1. Use gcloud CLI to set the project to the name of your Actions project. Use 'gcloud init' to initialize and set your Google cloud project to the name of the Actions project.
-    1. Deploy to [App Engine using Gradle](https://cloud.google.com/appengine/docs/flexible/java/using-gradle) by running the following command: `gradle appengineDeploy`. You can do this directly from
-    IntelliJ by opening the Gradle tray and running the appEngineDeploy task. This will start the process to deploy the fulfillment code to Google Cloud App Engine.
+1. Delete ActionsAWSHandler.java
+1. Remove the following line from build.gradle:
+     + `apply from: 'build-aws.gradle'`
+1. Download & install the [Google Cloud SDK](https://cloud.google.com/sdk/docs/)
+1. Configure the gcloud CLI and set your Google Cloud project to the name of your Actions on Google Project ID, which you can find from the [Actions on Google console](https://console.actions.google.com/) under Settings ⚙
+    + `gcloud init`
+    + `gcloud auth application-default login`
+    + `gcloud components install app-engine-java`
+    + `gcloud components update`
+1. Deploy to [App Engine using Gradle](https://cloud.google.com/appengine/docs/flexible/java/using-gradle):
+    + `gradle appengineDeploy` OR
+    +  From within IntelliJ, open the Gradle tray and run the appEngineDeploy task.
+1. Back in the [Dialogflow console](https://console.dialogflow.com), from the left navigation menu under **Fulfillment** > **Enable Webhook**, set the value of **URL** to `https://<YOUR_PROJECT_ID>.appspot.com` > **Save**.
 
 #### Build for AWS
-    1. Delete ActionsServlet
-    1. Remove the following line from build.gradle:
-       1. `apply from: 'build-gcp.gradle'`
-    1. Build the AWS Lambda compatible zip file using the buildAWSZip gradle task: `gradle buildAWSZip`
-    1. Deploy the zip file found at `build/distributions/myactions.zip` as an AWS Lambda function by following instructions at https://aws.amazon.com/lambda/
+1. Delete ActionsServlet
+1. Remove the following line from build.gradle:
+    + `apply from: 'build-gcp.gradle'`
+1. Build the AWS Lambda compatible zip file using the buildAWSZip gradle task: `gradle buildAWSZip`
+1. Deploy the zip file found at `build/distributions/myactions.zip` as an AWS Lambda function by following instructions at https://aws.amazon.com/lambda/
 
+#### Testing this Sample
+1. In the [Dialogflow console](https://console.dialogflow.com), from the left navigation menu > **Integrations** > **Integration Settings** under Google Assistant > Enable **Auto-preview changes** >  **Test** to open the Actions on Google simulator.
+1. Type `Talk to my test app` in the simulator, or say `OK Google, talk to my test app` to Google Assistant on a mobile device associated with your Action's account.
 
-## Test on the Actions on Google simulator
-1. Select [*Integrations*](https://console.dialogflow.com/api-client/#/agent//integrations) from the left navigation menu and open the *Settings* menu for Actions on Google.
-1. Enable *Auto-preview changes* and Click *Test*. This will open the Actions on Google simulator.
-1. Type `Talk to my test app` in the simulator, or say `OK Google, talk to my test app` to any Actions on Google enabled device signed into your developer account.
+### References & Issues
++ Questions? Go to [StackOverflow](https://stackoverflow.com/questions/tagged/actions-on-google), [Actions on Google G+ Developer Community](https://g.co/actionsdev), or [Support](https://developers.google.com/actions/support/).
++ For bugs, please report an issue on Github.
++ For Actions on Google [documentation](https://developers.google.com/actions/).
++ For specifics about [Gradle & the App Engine Plugin](https://cloud.google.com/appengine/docs/flexible/java/using-gradle).
++ For details on deploying [Java apps with App Engine](https://cloud.google.com/appengine/docs/standard/java/quickstart).
 
-For more detailed information on deployment, see the [documentation](https://developers.google.com/actions/dialogflow/deploy-fulfillment).
-
-## References and How to report bugs
-* Actions on Google documentation: [https://developers.google.com/actions/](https://developers.google.com/actions/).
-* If you find any issues, please open a bug here on GitHub.
-* Questions are answered on [StackOverflow](https://stackoverflow.com/questions/tagged/actions-on-google).
-
-## How to make contributions?
+### Make Contributions
 Please read and follow the steps in the [CONTRIBUTING.md](CONTRIBUTING.md).
 
-## License
+### License
 See [LICENSE](LICENSE).
 
-## Terms
+### Terms
 Your use of this sample is subject to, and by using or downloading the sample files you agree to comply with, the [Google APIs Terms of Service](https://developers.google.com/terms/).
-
-## Google+
-Actions on Google Developers Community on Google+ [https://g.co/actionsdev](https://g.co/actionsdev).
