@@ -39,7 +39,7 @@ repositories {
 dependencies {
     compile "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
 
-    compile group: 'com.google.actions', name: 'actions-on-google', version: '1.0.0'
+    compile group: 'com.google.actions', name: 'actions-on-google', version: '1.0.2'
 
     compile group: 'com.googlecode.json-simple', name: 'json-simple', version: '1.1.1'
 
