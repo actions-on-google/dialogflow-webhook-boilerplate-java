@@ -1,4 +1,4 @@
-# Actions on Google: Java Client Library Boilerplate
+# Actions on Google: Webhook Boilerplate
 
 Boilerplate to help you get started quickly with the Java client library for Actions on Google.
 
@@ -7,7 +7,7 @@ Boilerplate to help you get started quickly with the Java client library for Act
 #### Action Configuration
 1. From the [Actions on Google Console](https://console.actions.google.com/), add a new project (this will become your *Project ID*) > **Create Project**.
 1. Scroll down to the **More Options** section, and click on the **Conversational** card.
-1. From the left navigation menu under **Build** > **Actions** > **Add Your First Action** > **BUILD** (this will bring you to the Dialogflow console) > Select language and time zone > **CREATE**.
+1. From the top menu under **Develop** > **Actions** (left nav) > **Add your first action** > **BUILD** (this will bring you to the Dialogflow console) > Select language and time zone > **CREATE**.
 1. In Dialogflow, go to **Settings** ⚙ > **Export and Import** > **Restore from zip**.
     + Follow the directions to restore from the `agent.zip` file in this repo.
 
