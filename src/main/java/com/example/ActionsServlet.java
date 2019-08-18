@@ -37,7 +37,7 @@ import org.slf4j.LoggerFactory;
  */
 @WebServlet(name = "actions", value = "/")
 public class ActionsServlet extends HttpServlet {
-  private static final Logger LOG = LoggerFactory.getLogger(MyActionsApp.class);
+  private static final Logger LOG = LoggerFactory.getLogger(ActionsServlet.class);
   private final App actionsApp = new MyActionsApp();
 
   @Override
