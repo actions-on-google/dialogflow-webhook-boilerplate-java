@@ -22,8 +22,11 @@ import com.google.actions.api.DialogflowApp;
 import com.google.actions.api.ForIntent;
 import com.google.actions.api.response.ResponseBuilder;
 import com.google.api.services.actions_fulfillment.v2.model.User;
+
+import java.util.Map;
 import java.util.ResourceBundle;
 import java.util.stream.Collectors;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -33,33 +36,46 @@ import org.slf4j.LoggerFactory;
  */
 public class MyActionsApp extends DialogflowApp {
 
-  private static final Logger LOGGER = LoggerFactory.getLogger(MyActionsApp.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(MyActionsApp.class);
 
-  @ForIntent("Default Welcome Intent")
-  public ActionResponse welcome(ActionRequest request) {
-    LOGGER.info("Welcome intent start.");
-    ResponseBuilder responseBuilder = getResponseBuilder(request);
-    ResourceBundle rb = ResourceBundle.getBundle("resources");
-    User user = request.getUser();
+    @ForIntent("Default Welcome Intent")
+    public ActionResponse welcome(ActionRequest request) {
+        LOGGER.info("Welcome intent start.");
+        ResponseBuilder responseBuilder = getResponseBuilder(request);
+        ResourceBundle rb = ResourceBundle.getBundle("resources");
+        User user = request.getUser();
 
-    if (user != null && user.getLastSeen() != null) {
-      responseBuilder.add(rb.getString("welcome_back"));
-    } else {
-      responseBuilder.add(rb.getString("welcome"));
+        if (user != null && user.getLastSeen() != null) {
+            responseBuilder.add(rb.getString("welcome_back"));
+        } else {
+            responseBuilder.add(rb.getString("welcome"));
+        }
+
+        LOGGER.info("Welcome intent end.");
+        return responseBuilder.build();
     }
 
-    LOGGER.info("Welcome intent end.");
-    return responseBuilder.build();
-  }
+    @ForIntent("bye")
+    public ActionResponse bye(ActionRequest request) {
+        LOGGER.info("Bye intent start.");
+        ResponseBuilder responseBuilder = getResponseBuilder(request);
+        ResourceBundle rb = ResourceBundle.getBundle("resources");
 
-  @ForIntent("bye")
-  public ActionResponse bye(ActionRequest request) {
-    LOGGER.info("Bye intent start.");
-    ResponseBuilder responseBuilder = getResponseBuilder(request);
-    ResourceBundle rb = ResourceBundle.getBundle("resources");
+        responseBuilder.add(rb.getString("bye")).endConversation();
+        LOGGER.info("Bye intent end.");
+        return responseBuilder.build();
+    }
 
-    responseBuilder.add(rb.getString("bye")).endConversation();
-    LOGGER.info("Bye intent end.");
-    return responseBuilder.build();
-  }
+    @ForIntent("balance")
+    public ActionResponse accountBalance(ActionRequest request) {
+        ResponseBuilder responseBuilder = getResponseBuilder(request);
+
+
+        responseBuilder.add("Gotten to account balance, you dont have any");
+
+
+        return responseBuilder.build();
+
+
+    }
 }
