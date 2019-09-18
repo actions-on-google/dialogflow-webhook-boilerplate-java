@@ -65,17 +65,4 @@ public class MyActionsApp extends DialogflowApp {
         LOGGER.info("Bye intent end.");
         return responseBuilder.build();
     }
-
-    @ForIntent("balance")
-    public ActionResponse accountBalance(ActionRequest request) {
-        ResponseBuilder responseBuilder = getResponseBuilder(request);
-
-
-        responseBuilder.add("Gotten to account balance, you dont have any");
-
-
-        return responseBuilder.build();
-
-
-    }
 }
