@@ -11,7 +11,7 @@ import java.util.concurrent.ExecutionException;
 
 @RestController
 @RequestMapping("/actions")
-public class ActionsController {
+public class ActionsSpringBootController {
     private static final Logger LOG = LoggerFactory.getLogger(ActionsServlet.class);
     private final App actionsApp = new MyActionsApp();
 
@@ -32,10 +32,8 @@ public class ActionsController {
         return null;
     }
 
-
     private String handleError(Throwable throwable) {
         return ("Error handling the intent - " + throwable.getMessage());
     }
-
 
 }
